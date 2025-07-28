@@ -1,0 +1,9 @@
+Terminal Commands Concepts
+==========================
+1) CTRL + u --> to remove a line written
+2) CTRL + a --> to go to the start of line
+3) CTRL + e --> to go to the end of line
+4) CTRL + c --> to stop/kill of comamnd
+5) CTRL + d --> to exit from the interactive program 
+6) CTRL + z --> to suspend a command for a process
+7) CTRL + w --> to remove single word from the cursor
