@@ -1,0 +1,9 @@
+Pipes Concept Based Learning
+============================
+- Pipes are the concept/tool that used to combine two commands where one command output is piped as an argument to the
+  next command.
+- Pipes denoted as |
+- Syntax:
+	$ command1 [args] | command2 [args]
+- Example:
+	$ mkdir FolderName | touch FileName.ext | find ./Fold* -name FileN*.ext
