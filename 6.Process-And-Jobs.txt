@@ -1,0 +1,76 @@
+Process And Jobs In Linux System
+================================
+1) Application     : Unit Services
+2) Script 	   : basically shell script/commands file  
+3) Process 	   : when program/application runs it will be create single/multiple process providing processids
+4) Daemons	   : processes that run in the background on system boot untill interuptted which responsible for monitoring network
+5) Thread	   : Single process can have multiple threads where each thread responsible holding some work to do
+6) Job/Workorder   : Runs a process or services at a schedule time.
+
+
+Process And Services Commands:
+==============================
+a) systemctl	--> to see the unit servicess running the backgroud
+b) ps		--> to see the processing running
+c) top          --> to show the processes information running in the system based on their workloads including resources used
+d) kill		--> to kill a process
+e) crontab	--> to schedule services or process to serve a job
+f) at		--> to schedule a services or process in one time basis or as adhoc process
+
+
+1. systemctl Commands:
+	- to work with unit services in the system
+	- Syntax:
+		$ sudo systemctl [work_type] [unit_services]
+
+	  Breakdown Of [work_type] And [unit_services]
+	  	a. [work_type] - 
+			1. start
+			2. stop
+			3. restart
+			4. enable
+			5. status
+
+		b. [unit_services] - any services of the process
+	  	
+	- unit services has tailing 'd' is the daemon processes
+	- Example:
+		$ sudo systemctl enable httpd
+		$ sudo systemctl start httpd
+		$ sudo systemctl stop httpd
+		$ sudo systemctl restart httpd
+	- 	$ sudo systemctl status httpd
+
+2. ps Command:
+	- to check the process running in the background
+	- Syntax:
+		ps [Flag/Flags]
+	- Example:
+		$ sudo ps -ef 				# show all running processes
+		$ sudo ps -ef | grep httpd 		# to see only the process containing httpd 
+		$ sudo ps -aux 				# show all running processes
+
+
+3. kill Command:
+	- to kill a process
+	- Syntax:
+		$ kill [process_id]
+
+4. crontab Command:
+	- to schedule a process or services or scripts
+	- Syntax:
+		$ crontab [Flags]
+		
+		Flags:
+			a) -l ---> to list the crons already listed
+			b) -e ---> to edit the crontab 
+	- Crontab Formatting:
+		Min Hour DayOfMonth Month DayOfWeek [jobstodo]
+		15   2       *        4       2     systemctl enable httpd
+	
+
+
+
+
+5. at Command:
+	
