@@ -1,0 +1,62 @@
+Linux Network Utilities And Commands
+====================================
+a) Network Files Utilities
+	a) Interface Detection
+	b) Assigning IP Address
+	c) Interfaces Configuration Files Located-
+		1) /etc/nsswitch.conf
+		2) /etc/hostname
+		3) /etc/sysconfig/network
+		4) /etc/sysconfig/network-scripts/
+		5) /etc/resolv.conf
+	
+
+b) Network Commands
+	a) ifconfig 		--> to check the available interfaces
+	b) ping			--> to get the data packs via ping an ip address
+	c) ifup or ifdown	--> to either up a network or down a network
+	d) netstat		--> to check more details information of network
+	e) tcpdump		--> to traces every network transaction happining in machine in or out.
+	f) ethtool 		--> to get more information about network interace card			
+
+
+a) ifconfig Command:
+	- to check for the connected network interfaces
+	- Syntax:
+		$ ifconfig
+	
+
+b) ping	Command:
+	- to ping an ip address if its running or not
+	- Syntax:
+		$ ping ip_addrress 	# ping via ip
+		$ ping dns_name		# ping via dns
+	
+c) ifup Or ipdown Command:
+	- to either up or down an ip
+	- Syntax:
+		$ ifup ip_address
+		$ ifdown ip_address
+	
+d) netstat Command:
+	- to check more details on the network
+	- Syntax:
+		$ netstat [Flag]
+	- Example:
+		$ netstat -rnv
+
+e) tcpdump Command:
+	- to check for the traces stat of the network
+	- Syntax:
+		$ tcpdump [Flag] interace_name
+	- Example:
+		$ tcpdump -i esp03
+
+f) ethtool Command:
+	- to check for NIC(Network Interface Card) information
+	- Syntax:
+		$ ethtool interace_name
+	- Example:
+		$ ethtool enp0s3
+
+
