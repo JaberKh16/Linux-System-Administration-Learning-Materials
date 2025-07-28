@@ -1,0 +1,32 @@
+Linux Kernel And Shell Concept
+==============================
+a) Linux Kernel:
+	- an interface/program between hardware and shell
+	- used to communicate with hardware through shell where kernel plays the role to interprets shell given 
+	  commands to work with the hardware.
+	
+b) Linux Shell:
+	- an interface users and kernel/os
+	- CLI is a shell
+	- To Find Shell Information:
+		a) echo $0
+		b) cat /etc/shells
+		c) cat /etc/passwd
+
+
+
+Shell Scripting:
+===============
+- A shell script is an executable file containing multiple shell commands that are executed sequentially.
+- Shell Contains:
+	a) Shell 	- #!/bin/bash
+	b) Comments 	- #
+	c) Commands	- echo, cp, grep etc
+	d) Statements	- if, then, elif, while, for etc
+	
+- Shell Script should have an executable permission where 'x' denoted the executable permission
+- Shell Script has to be called from absolute path
+- To run a script:
+	Syntaxx:
+		$ ./script_name.sh
+
