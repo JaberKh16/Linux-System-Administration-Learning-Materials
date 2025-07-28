@@ -1,0 +1,208 @@
+Linux Commands Based Learning
+==============================
+List of commands are:
+	1. File Navigation Commands:
+		a) cd --> to change directory
+		b) pwd --> to get the current directory info
+		c) ls --> to list directory/files
+	2. File Maintenance Commands:
+		a) touch --> to create file
+		b) mkdir --> to create directory
+		c) mv --> to rename/change location of any folder/file name
+		d) cp --> to copy any folder/file name
+		e) rm --> to remove a file
+		f) changrp --> to change the group
+		g) chown --> to change the ownership
+	
+	3. File Locating Commands:
+		a) find --> to find a file
+		b) locate --> to locate a file
+
+	4. File Reading Commands:
+		a) echo --> to print information
+		b) tail --> to get lines content from last
+		c) head --> to get lines content from top
+		d) cat --> to read the entire content of a file
+		e) more --> to see the content of a file in normal order as single page
+		f) less --> to see the content of a file in reverse order as single page
+	
+	5. Filters/Text Processing Commands:
+		a) awk --> to separate each column in a file
+		b) cut --> to cut character from a file 
+		c) grep --> to grep/search content from a file 
+		d) sort --> to sort the file content
+		e) uniq --> to remove duplicates from the file
+		f) wc --> to get the word count for a file
+	
+	6. Compare Files Commands:
+		a) diff --> to get the difference changes in two files
+		b) comp --> to get the comparison between two files
+	
+	
+	7. System Utilities Commands:
+		a) date		--> to get the date info in unix timestamp
+		b) uptime	--> to show the uptime log of the running system
+		c) hostname	--> to get the hostname
+		d) whoami	--> to get the username
+		e) uname 	--> to get the machine,os,kernel information
+		e) which	--> to get the command binary file located
+		f) cal		--> to get the calender
+		g) bc		--> to get the binary calculator tool
+
+	8. Monitoring Users Commands:
+		a) who     --> to tell the logged user, terminal info
+		b) last    --> list all users info log
+		c) id	   --> to check specified userprofile
+		d) w	   --> to get more information of logged user
+		e) finger  --> to get the trace of the users
+
+
+	9. Compressing/Uncompressing Commands:
+		a) tar
+		b) gzip
+		c) gunzip
+	
+
+	10. Symbolic/Hard Link Commands:
+		a) ln -s filename
+		b) ln -h filename
+
+
+	11. User Management Commands:
+		a) useradd
+		b) userdel
+		c) groupadd
+		d) groupdel
+		e) usermod
+		g) chgrp
+
+	    File:
+	    	/etc/passwd
+		/etc/shadow
+		/etc/group
+	
+	12. Sudo Access/Switch User Commands:
+		a) su - username  --> to switch users
+		b) sudo 	  --> to excute command as sudo 
+		c) visudio 	  --> to check/edit for sudoers file
+		   File:
+		   	/etc/sudoers
+	
+	13. Disk Utilities Commands:
+		a) fdisk
+		b) lsblk
+
+
+a) Help Command:
+	- To check for the each command information.
+	- Types of help command:
+		1) whatis command --> to get the short description
+		2) command --help --> to get little bit extra information
+		3) man command ---> to get the manual for that command 
+
+
+b) cut Command:
+	- To cut characters information from a file
+	- Syntax:
+		$ cut -c1 [filename]  # 1 indicating a {numeric} value to cut single word starting from index 0
+		$ cut -c1-4 [filename] # 1-4 indicating a {range} value to cut a range of content from index 0 
+
+c) awk Command:
+	- To get columnwise information cutting.
+	- Syntax:
+		$ awk '[expresion]' filename  # [expression] is:- print $num
+	- Example:
+		$ awk '[print $1]' filename # to read/cut single column information
+
+d) sort Command:
+	- To sort the content
+	- Syntax:
+		$ sort filename 	 # sort in ascending order
+		$ sort -r filename	 # to sort in descending order
+
+e) wc Command:
+	- To count the words in a file.
+	- Syntax:
+		$ wc filename 		# to get the word count in file
+		$ wc [flags] filename   # to get specific content from a file
+		  Flags:
+		  	-w  ---> to get the word count only
+			-l  ---> to get the lines
+
+
+f) grep Command:
+	- To search specific content from a file
+	- Syntax:
+		$ grep "[content]" filename 	# to specified content from the file
+g) diff Command:
+	- To get the difference
+	- Syntax:
+		$ diff file1 file2 	# showed the changes in the files if have any differences
+h) comp Command:
+	- To get the comparism
+	- Syntax:
+		$ comp file1 file2	# shows the comparision including differences and bytes change log
+i) tar Command:
+	- To compressed files
+	- Syntax:
+		$ tar cvf filename.tar [path]   # [path] can be absolute/relative, cvf is the flags
+		$ tar xvf filename.tar [path]	# xvf flag to tell extract the file
+
+j) gzip Command:
+	- To compressed files.
+	- Syntax:
+		$ gzip filename 		# to compressed the files
+
+k) gunzip -d Command:
+	- To uncompressed file
+	- Syntax:
+		$ gunzip -d filename [path] 	# to uncompressed file containing .gz extension
+		$ gzip -d filename [path]
+
+
+m) id Command:
+	- To check for userid/username for paricular userprofile
+	- Syntax:
+		$ id username		# gets the specified userprofile info in formate like - uid gid groups
+
+
+n) useradd Command:
+	- To add user in linux system
+	- Syntax:
+		$ user -g groupname -s [shell-path: /bin/bash] -c "[description]" -m -d [homedirectory] [username]
+	
+	  Flags Details:
+	  	-g  ---> to defined group
+		-s  ---> to include shell
+		-m  ---> to define home directory
+		-d  ---> to define username
+o) userdel Command:
+	- To delete user in linux system
+	- Syntax:
+		$ userdel -r username 	# to delete the userprofile
+
+p) usermod Command:
+	- To modify userprofile
+	- Syntax:
+		$ usermod -G groupname username 	# to include specified user in the specified group
+	
+
+q) groupadd Command:
+	- To add group
+	- Syntax:
+		$ groupadd groupname		# to create/add group 
+
+r) groupdel Command:
+	- To delete group
+	- Syntax:
+		$ groupdel groupname		# to delete group
+
+s) chgrp Command:
+	- To change group 
+	- Syntax:
+		$ chgrp -R groupname changegroupname	# to chnage groupname to changegroupname 
+	  Flag:
+	  	-R ---> to casscase this changes to every file
+
+	
+	
