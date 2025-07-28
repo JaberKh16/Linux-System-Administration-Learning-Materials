@@ -81,5 +81,6 @@ Finding System Information
 a) uname -a		--> to get information about os and kernel system information	
 b) dmidecode   		--> to get information about process, hardware, memory
 
+
 Files:
 	1) /etc/redhat-release
