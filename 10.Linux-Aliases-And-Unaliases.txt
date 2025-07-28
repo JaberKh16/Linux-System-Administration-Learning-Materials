@@ -1,0 +1,18 @@
+Linux Aliases And Unaliases Concept
+===================================
+a) Aliases:
+	- to make the shorter version of any commands
+	- Syntax:
+		$ alias l= "ls -la"
+		$ alias tell="hostname; whoami; uname -a"
+		$ alias d="df -h| awk '{print \$6}' | cut -cl-4"
+
+b) Unaliases:
+	- to unaliases the alias commands
+	- Syntax:
+		$ unalias [alias_name]
+
+	- Example:
+		$ unalias l
+
+
