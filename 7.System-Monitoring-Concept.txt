@@ -1,0 +1,85 @@
+System Monitoring Commands:
+===========================
+a) top		--> to see the process information including their resources
+b) df		--> to see the disk information
+c) dmesg   	--> to get the report log on system related warnings
+d) netstat	--> to monitor/get network stat
+e) iostat       --> to get i/o peripheral devices information stat
+f) free		--> to see the physical and swap memory space information 
+g) du		--> to get each file taken estimated spaces information
+
+Files:
+	1)  /proc/cpuinfo
+	2)  /proc/meminfo
+
+
+a) top Command:
+	- to check for the running processes with their resources used information
+	- Syntax:
+		$ top 
+
+b) df Command:
+	- to check the disk partioning information
+	- Syntax:
+		$ df [Flags]
+		
+		Flags:
+			1) -h  ---> to show in human readable format
+
+
+c) du Command:
+	- tell about estimated file space in disk
+	- Syntax:
+		$ du [Flags]
+
+		Flags:
+			1) 
+
+d) netstat Command:
+	- tell about the network stat information
+	- Syntax:
+		$ netstat -rnv 
+
+e) iostat Command:
+	- to see the peripheral and internal devices communication info
+	- Syntax:
+		$ iostat 	# to see information 
+		$ iostat 1 	# to see information in 1 sec refresh mood
+
+
+f) dmesg Command:
+	- to see the system warning log report
+	- Syntax:
+		$ dmesg 	# to see warning log
+
+
+
+
+System Maintanence Commands:
+============================
+a) shutdown	--> to shutdown the system
+b) reboot	--> to reboot the system
+c) halt		--> to halt the system
+d) init		--> to do system down or rebooting in some levels
+
+
+
+
+Hosting Related Command:
+========================
+a) Changing Hostname Command:
+	- to change the hostname
+	- Syntax:
+		$ hostnamectl --set-hostname newhostname
+	- Version Wise Command Formatted Files:
+		1) /etc/hostname              	-- Version 7
+		2) /etc/sysconfig/network	-- Version 6
+		
+
+Finding System Information
+==========================
+a) uname -a		--> to get information about os and kernel system information	
+b) dmidecode   		--> to get information about process, hardware, memory
+
+Files:
+	1) /etc/redhat-release
