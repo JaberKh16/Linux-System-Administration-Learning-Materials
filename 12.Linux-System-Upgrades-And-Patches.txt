@@ -1,0 +1,21 @@
+Linux System Updates And Patches
+=================================
+a) Types Of Upgrades In Linux
+	1) Major Version --> 5, 6, 7
+	2) Minor Version --> 6.3 
+
+1) Version Check
+	- use command:
+		$ uname -a
+	- check file
+		$ cat /etc/*release
+
+2) Minor Update/Upgrades
+	- upgrades work as deleting old packages and install newer one
+	- update work as preserving old packages and install newer one
+	- Syntax:
+		$ package_manager update -y 
+		$ package_manager upgrade -y
+
+
+
