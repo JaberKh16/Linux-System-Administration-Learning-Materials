@@ -1,0 +1,23 @@
+Linux File Transfer Commands
+===========================
+- Linux supported some file transfer commands are:
+	a) ftp		--> file transper protocol
+	b) scp 		--> secure copy protocol
+	c) rsync	--> to perform file backups
+
+
+a) ftp Command
+	- to perform file transfer in ftp
+	- Syntax:
+		$ ftp server_name 			# to connect to remote ftp server
+		$ ftp > put [filename/direcory]		# to send the file/directory
+		$ ftp > bye 				# to exit the server
+
+
+b) scp Command
+	- to perform a secure file transfer
+	- Syntax:
+		$ scp file_name server_name:[path]
+	- Example:
+		$ scp text_file.txt localhost:/home/username/folder_name
+	
