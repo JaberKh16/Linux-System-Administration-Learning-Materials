@@ -1,0 +1,21 @@
+Linux System Level Concepts
+===========================
+- Linux has some system level
+- Types:
+	a) Main Levels
+	b) Other Levels
+
+a) Main Levels
+	- 0 --> shut down(halt) the system
+	- 1 --> single user mood usally alaised as s or S
+	- 6 --> reboot the system
+
+b) Other Levels
+	- 2 --> multiuser mood without networking
+	- 3 --> multiuser mood withou GUI but networking
+	- 5 --> multiuser mood with network and GUI
+
+
+- Check run level
+	$ uname -r 
+	$ init 6 	# to reboot the system bring back to previous or run level 5
