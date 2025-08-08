@@ -1,0 +1,9 @@
+!/bin/sh
+declare -r FILENAME=$1
+declare -r OLD_VERSION=$2
+declare -r NEW_VERSION=$3
+declare -r BACKUP_FILENAME=${FILENAME%.*}'_'$OLD_VERSION'.'${FILENAME##*.}
+declare -r CONTENT=`cat $FILENAME`
+
+cp $FILENAME $BACKUP_FILENAME
+echo "${CONTENT//$OLD_VERSION/$NEW_VERSION}" > $FILENAME
