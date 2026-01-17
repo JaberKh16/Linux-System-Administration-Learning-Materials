@@ -73,4 +73,269 @@ f) at		--> to schedule a services or process in one time basis or as adhoc proce
 
 
 5. at Command:
+	- to schedule a one-time job or adhoc process at a specific time
+	- Syntax:
+		$ at [time_specification]
+		$ at [HH:MM] [AM/PM]
+		$ at [time] [date]
 	
+	- Installation (if not available):
+		$ sudo dnf install at -y		# For Fedora/RHEL
+		$ sudo apt install at -y		# For Debian/Ubuntu
+	
+	- Start and enable atd service:
+		$ sudo systemctl enable atd
+		$ sudo systemctl start atd
+	
+	- Common Flags:
+		-l or atq	--> list scheduled jobs
+		-d or atrm	--> delete a scheduled job
+		-c		--> show the content of a job
+	
+	- Time Specifications:
+		now + [number] [minutes/hours/days/weeks]
+		HH:MM
+		midnight, noon, teatime (4pm)
+		MMDDYY or MM/DD/YY or DD.MM.YY
+	
+	- Examples:
+		# Schedule a job at 3:30 PM today
+		$ at 3:30 PM
+		at> systemctl restart httpd
+		at> <EOT>				# Press Ctrl+D to save
+	
+		# Schedule a job 5 minutes from now
+		$ at now + 5 minutes
+		at> echo "Backup complete" > /tmp/backup.log
+		at> <EOT>
+	
+		# Schedule a job at specific date and time
+		$ at 10:00 AM 01/20/2026
+		at> /home/user/scripts/backup.sh
+		at> <EOT>
+	
+		# Using echo to schedule command
+		$ echo "systemctl restart nginx" | at now + 10 minutes
+	
+		# List all scheduled jobs
+		$ atq
+		$ at -l
+	
+		# Remove a scheduled job (job number from atq)
+		$ atrm 3
+		$ at -d 3
+	
+		# View contents of job number 2
+		$ at -c 2
+
+
+6. Setting Up a Custom systemd Service:
+	- systemd is the init system used by modern Linux distributions
+	- Custom services allow you to manage your applications like system services
+	
+	A. Create a Service Unit File:
+	   - Service files are stored in:
+		/etc/systemd/system/		# For system services
+		~/.config/systemd/user/		# For user services
+	
+	B. Service File Structure:
+	   Location: /etc/systemd/system/myapp.service
+	   
+	   Basic Template:
+	   ----------------------------------------
+	   [Unit]
+	   Description=My Custom Application
+	   After=network.target
+	   
+	   [Service]
+	   Type=simple
+	   User=username
+	   WorkingDirectory=/path/to/app
+	   ExecStart=/path/to/app/start-script.sh
+	   ExecStop=/path/to/app/stop-script.sh
+	   Restart=on-failure
+	   RestartSec=10
+	   
+	   [Install]
+	   WantedBy=multi-user.target
+	   ----------------------------------------
+	
+	C. Service File Sections Explained:
+	   
+	   [Unit] Section:
+		Description=		# Human readable description
+		After=			# Start after these units
+		Before=			# Start before these units
+		Requires=		# Hard dependency
+		Wants=			# Soft dependency
+	   
+	   [Service] Section:
+		Type=			# Service type (simple, forking, oneshot, etc.)
+		User=			# Run as this user
+		Group=			# Run as this group
+		WorkingDirectory=	# Working directory for the service
+		ExecStart=		# Command to start service
+		ExecStop=		# Command to stop service (optional)
+		ExecReload=		# Command to reload service (optional)
+		Restart=		# Restart policy (no, always, on-failure)
+		RestartSec=		# Time to wait before restart
+		Environment=		# Environment variables
+		EnvironmentFile=	# File containing environment variables
+	   
+	   [Install] Section:
+		WantedBy=		# Target to attach this service to
+		RequiredBy=		# Units that require this service
+	
+	D. Service Types:
+		simple		# Default, process started by ExecStart is main process
+		forking		# Process forks and parent exits
+		oneshot		# Process exits before starting follow-up units
+		idling		# Similar to simple, delayed until all jobs dispatched
+		notify		# Process sends notification when ready
+	
+	E. Complete Example - Web Application Service:
+	   
+	   Step 1: Create the service file
+	   $ sudo vim /etc/systemd/system/webapp.service
+	   
+	   Content:
+	   ----------------------------------------
+	   [Unit]
+	   Description=My Web Application
+	   After=network.target postgresql.service
+	   Requires=postgresql.service
+	   
+	   [Service]
+	   Type=simple
+	   User=webuser
+	   Group=webuser
+	   WorkingDirectory=/opt/webapp
+	   Environment="PORT=8080"
+	   Environment="NODE_ENV=production"
+	   ExecStart=/usr/bin/node /opt/webapp/server.js
+	   ExecReload=/bin/kill -HUP $MAINPID
+	   Restart=always
+	   RestartSec=5
+	   StandardOutput=journal
+	   StandardError=journal
+	   
+	   [Install]
+	   WantedBy=multi-user.target
+	   ----------------------------------------
+	   
+	   Step 2: Reload systemd daemon
+	   $ sudo systemctl daemon-reload
+	   
+	   Step 3: Enable the service (start on boot)
+	   $ sudo systemctl enable webapp.service
+	   
+	   Step 4: Start the service
+	   $ sudo systemctl start webapp.service
+	   
+	   Step 5: Check service status
+	   $ sudo systemctl status webapp.service
+	   
+	   Step 6: View service logs
+	   $ sudo journalctl -u webapp.service -f
+	
+	F. Example - Python Script Service:
+	   
+	   $ sudo vim /etc/systemd/system/monitor.service
+	   
+	   ----------------------------------------
+	   [Unit]
+	   Description=System Monitor Script
+	   After=multi-user.target
+	   
+	   [Service]
+	   Type=simple
+	   User=root
+	   ExecStart=/usr/bin/python3 /opt/scripts/monitor.py
+	   Restart=on-failure
+	   RestartSec=30
+	   
+	   [Install]
+	   WantedBy=multi-user.target
+	   ----------------------------------------
+	
+	G. Example - Bash Script Service with Timer:
+	   
+	   Service file: /etc/systemd/system/backup.service
+	   ----------------------------------------
+	   [Unit]
+	   Description=Backup Service
+	   
+	   [Service]
+	   Type=oneshot
+	   ExecStart=/usr/local/bin/backup.sh
+	   ----------------------------------------
+	   
+	   Timer file: /etc/systemd/system/backup.timer
+	   ----------------------------------------
+	   [Unit]
+	   Description=Run backup daily
+	   
+	   [Timer]
+	   OnCalendar=daily
+	   Persistent=true
+	   
+	   [Install]
+	   WantedBy=timers.target
+	   ----------------------------------------
+	   
+	   Enable and start the timer:
+	   $ sudo systemctl daemon-reload
+	   $ sudo systemctl enable backup.timer
+	   $ sudo systemctl start backup.timer
+	   $ sudo systemctl list-timers
+	
+	H. Managing Custom Services:
+	   
+	   # Reload systemd after creating/editing service files
+	   $ sudo systemctl daemon-reload
+	   
+	   # Start service
+	   $ sudo systemctl start myservice.service
+	   
+	   # Stop service
+	   $ sudo systemctl stop myservice.service
+	   
+	   # Restart service
+	   $ sudo systemctl restart myservice.service
+	   
+	   # Enable service (start on boot)
+	   $ sudo systemctl enable myservice.service
+	   
+	   # Disable service
+	   $ sudo systemctl disable myservice.service
+	   
+	   # Check service status
+	   $ sudo systemctl status myservice.service
+	   
+	   # View service logs
+	   $ sudo journalctl -u myservice.service
+	   $ sudo journalctl -u myservice.service -f	# Follow logs
+	   $ sudo journalctl -u myservice.service --since today
+	   
+	   # Check if service is enabled
+	   $ sudo systemctl is-enabled myservice.service
+	   
+	   # Check if service is active
+	   $ sudo systemctl is-active myservice.service
+	   
+	   # Edit service file
+	   $ sudo systemctl edit --full myservice.service
+	
+	I. Troubleshooting:
+	   
+	   # Check for syntax errors
+	   $ sudo systemd-analyze verify /etc/systemd/system/myservice.service
+	   
+	   # View failed services
+	   $ sudo systemctl --failed
+	   
+	   # Reset failed state
+	   $ sudo systemctl reset-failed myservice.service
+	   
+	   # Check service dependencies
+	   $ sudo systemctl list-dependencies myservice.service
