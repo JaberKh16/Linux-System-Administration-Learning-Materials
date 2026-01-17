@@ -1,0 +1,17 @@
+Linux System Commands
+======================
+
+0. to check user of the os
+    
+    $ whoami   # shows username of the system
+
+1. to check os information
+    
+    $ ls /etc/*release*  # show os release info
+    
+    $ cat /etc/*rele*    # to see more details info
+
+
+2. to check kernel information
+
+    $ uname -a  # show kernel info => Linux fedora 6.11.9-100.fc39.x86_64 #1 SMP PREEMPT_DYNAMIC Sun Nov 17 18:52:19 UTC 2024 x86_64 GNU/Linux
