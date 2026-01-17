@@ -1,6 +1,7 @@
 Linux Commands Based Learning
 ==============================
 List of commands are:
+    
 	1. File Navigation Commands:
 		a) cd --> to change directory
 		b) pwd --> to get the current directory info
